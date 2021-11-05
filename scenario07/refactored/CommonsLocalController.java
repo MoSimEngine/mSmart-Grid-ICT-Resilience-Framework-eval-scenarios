@@ -11,7 +11,6 @@ import couplingToICT.SimcontrolException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
-import input.ScenarioState;
 import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -22,7 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 public class CommonsLocalController implements ISimulationController {
     protected static final Logger LOG = Logger.getLogger(LocalController.class);
 
-    protected DomainReactiveSimulationController reactiveSimControl;
+    protected AnalysisReactiveSimulationController reactiveSimControl;
 
     // 1
     @Override
@@ -50,7 +49,7 @@ public class CommonsLocalController implements ISimulationController {
 
     @Override
     protected void initConfiguration(Map<InitializationMapKeys, String> initMap) {
-        this.reactiveSimControl = new DomainReactiveSimulationController();
+        this.reactiveSimControl = new AnalysisReactiveSimulationController();
         // Values in the map
         String outputPath = null;
         String topoPath = "";
@@ -81,17 +80,5 @@ public class CommonsLocalController implements ISimulationController {
         } catch (CoreException e) {
             CommonsLocalController.LOG.error("Error while intializing the simulations");
         }
-    }
-
-    protected ScenarioState getInitalState() {
-        return this.reactiveSimControl.getInitialState();
-    }
-
-    protected void setInitalState(ScenarioState initialState) {
-        this.reactiveSimControl.setInitialState(initialState);
-    }
-
-    protected void setImpactInput(ScenarioState impactInput) {
-        this.reactiveSimControl.setImpactInput(impactInput);
     }
 }

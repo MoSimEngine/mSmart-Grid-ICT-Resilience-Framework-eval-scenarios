@@ -1,6 +1,4 @@
 package smartgrid.impactanalysis;
-import InitializationMapKeys.IGNORE_LOC_CON_KEY;
-import couplingToICT.initializer.InitializationMapKeys;
 import input.EntityState;
 import input.PowerState;
 import java.util.HashMap;
@@ -9,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import output.Cluster;
-import smartgrid.helper.HashMapHelper;
-import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 public class CommonsGraphAnalyzer implements IImpactAnalysis {
     protected static final Logger LOG = Logger.getLogger(GraphAnalyzer.class);
@@ -82,29 +78,6 @@ public class CommonsGraphAnalyzer implements IImpactAnalysis {
     }
 
     /**
-     * for Test purposes
-     *
-     * @param ignoreLogicalConnections
-     * 		whether to ignore logical connections or not
-     */
-    @Deprecated
-    protected void initForTesting(final boolean ignoreLogicalConnections) {
-        this.internalMaxID = 0;
-        this.powerStates = new HashMap<>();
-        this.entityStates = new HashMap<>();
-        this.controlCenters = new LinkedList<>();
-        this.internalToExternalID = new HashMap<>();
-        this.externalToInternalID = new HashMap<>();
-        this.internalToCluster = new HashMap<>();
-        this.logicalNodes = new LinkedList<>();
-        this.controlCenterConnectivity = new HashMap<>();
-        this.ignoreLogicalConnections = ignoreLogicalConnections;
-        CommonsGraphAnalyzer.LOG.info("Ignoring logical connections: " + ignoreLogicalConnections);
-        CommonsGraphAnalyzer.LOG.debug("Init done");
-        this.initDone = true;
-    }
-
-    /**
      *
      *
      * @return int
@@ -113,14 +86,6 @@ public class CommonsGraphAnalyzer implements IImpactAnalysis {
         final int result = this.internalMaxID;
         this.internalMaxID++;
         return result;
-    }
-
-    protected boolean externalNodeIsDestroyed(final String id) {
-        return this.entityStates.get(id).isIsDestroyed();
-    }
-
-    protected boolean externalNodeIsHacked(final String id) {
-        return this.entityStates.get(id).isIsHacked();
     }
 
     protected boolean areInSameCluster(final int n, final int m, final List<List<Integer>> clusterList) {
@@ -152,29 +117,5 @@ public class CommonsGraphAnalyzer implements IImpactAnalysis {
     @Override
     protected String getName() {
         return "Graph Analyzer Impact Analysis";
-    }
-
-    @Override
-    protected void init(final Map<InitializationMapKeys, String> initMap) {
-        this.internalMaxID = 0;
-        this.powerStates = new HashMap<>();
-        this.entityStates = new HashMap<>();
-        this.controlCenters = new LinkedList<>();
-        this.internalToExternalID = new HashMap<>();
-        this.externalToInternalID = new HashMap<>();
-        this.internalToCluster = new HashMap<>();
-        this.logicalNodes = new LinkedList<>();
-        this.controlCenterConnectivity = new HashMap<>();
-        final String ignoreLogicalConnectionsString = HashMapHelper.getAttribute(initMap, IGNORE_LOC_CON_KEY, Constants.FAIL);
-        if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
-            // Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
-            this.ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
-        } else {
-            // checks whether ignoreLogicalConnectionsString is true and assigns it
-            this.ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
-        }
-        CommonsGraphAnalyzer.LOG.info("Ignoring logical connections: " + this.ignoreLogicalConnections);
-        CommonsGraphAnalyzer.LOG.debug("Init done");
-        this.initDone = true;
     }
 }

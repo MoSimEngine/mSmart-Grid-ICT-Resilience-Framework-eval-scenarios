@@ -8,7 +8,6 @@ import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
 import couplingToICT.initializer.TopoGenerationStyle;
-import input.ScenarioState;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import output.ScenarioResult;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
@@ -38,12 +36,6 @@ public class CommonsReactiveSimulationController {
     protected FileAppender fileAppender;
 
     protected IImpactAnalysis impactAnalsis;
-
-    protected ScenarioState impactInput;
-
-    protected ScenarioResult impactResult;
-
-    protected ScenarioState initialState;
 
     protected PowerSpecsModificationTypes powerDemandModificationType;
 
@@ -128,21 +120,5 @@ public class CommonsReactiveSimulationController {
             Logger.getRootLogger().removeAppender(this.fileAppender);
             this.fileAppender.close();
         }
-    }
-
-    protected ScenarioState getInitialState() {
-        return this.initialState;
-    }
-
-    protected void setInitialState(ScenarioState initialState) {
-        this.initialState = initialState;
-    }
-
-    protected ScenarioState getImpactInput() {
-        return this.impactInput;
-    }
-
-    protected void setImpactInput(ScenarioState impactInput) {
-        this.impactInput = impactInput;
     }
 }

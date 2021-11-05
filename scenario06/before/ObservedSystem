@@ -8,3 +8,4 @@ smartgrid.newsimcontrol.controller.LocalController
 smartgrid.newsimcontrol.tests.rcp.RCPCall
 smartgrid.newsimcontrol.controller.ReactiveSimulationController
 smartgrid.newsimcontrol.rcp.SmartgridRCPApplication
+smartgrid.newsimcontrol.rcp.commands.SimControlCommands

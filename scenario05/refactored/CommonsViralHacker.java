@@ -4,13 +4,8 @@ import InitializationMapKeys.HACKING_STYLE_KEY;
 import InitializationMapKeys.IGNORE_LOC_CON_KEY;
 import InitializationMapKeys.ROOT_NODE_ID_KEY;
 import couplingToICT.initializer.InitializationMapKeys;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
-import output.On;
-import output.ScenarioResult;
-import smartgrid.attackersimulation.strategies.FullyMeshedStrategy;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
@@ -52,31 +47,6 @@ public class CommonsViralHacker implements IAttackerSimulation {
     @Override
     protected boolean enableRootNode() {
         return false;
-    }
-
-    /**
-     *
-     *
-     * @param scenario
-     * 		
-     */
-    protected void fullyMeshedHacking(final ScenarioResult scenario) {
-        final var hackedNodes = this.getHackedNodes(scenario);
-        final var strategy = new FullyMeshedStrategy(this.hackingSpeed);
-        for (final var rootNodeItem : hackedNodes) {
-            strategy.hackNextNode(rootNodeItem);
-        }
-    }
-
-    /**
-     * helper method to get the hacked nodes before every timeStep
-     *
-     * @param scenario
-     * 		
-     * @return list of hacked nodes
-     */
-    protected List<On> getHackedNodes(final ScenarioResult scenario) {
-        return scenario.getClusters().stream().flatMap(( e) -> e.getHasEntities().stream()).filter(( e) -> e.isIsHacked()).collect(Collectors.toList());
     }
 
     @Override
