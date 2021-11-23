@@ -23,7 +23,7 @@ import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 public class CommonsReactiveSimulationController {
-    protected static final Logger LOG = Logger.getLogger(CommonsReactiveSimulationController.class);
+    protected static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
     protected static boolean isOutage(double supply) {
         return supply == 0.0;

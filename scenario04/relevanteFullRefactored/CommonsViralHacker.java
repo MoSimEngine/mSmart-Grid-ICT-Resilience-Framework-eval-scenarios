@@ -11,7 +11,7 @@ import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 public class CommonsViralHacker implements IAttackerSimulation {
-    protected static final Logger LOG = Logger.getLogger(CommonsViralHacker.class);
+    protected static final Logger LOG = Logger.getLogger(ViralHacker.class);
 
     // state variables
     protected boolean initDone;
